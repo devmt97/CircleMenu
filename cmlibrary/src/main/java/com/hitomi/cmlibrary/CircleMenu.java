@@ -262,15 +262,15 @@ public class CircleMenu extends View {
      * @param canvas
      */
     private void drawCirclePath(Canvas canvas) {
-        canvas.save();
-        canvas.rotate(rotateAngle, centerX, centerY);
-        dstPath.reset();
-        dstPath.lineTo(0, 0);
-        pathMeasure.getSegment(0, pathLength * fraction, dstPath, true);
-        cPaint.setStrokeWidth(partSize * 2);
-        cPaint.setColor(getClickMenuColor());
-        canvas.drawPath(dstPath, cPaint);
-        canvas.restore();
+//        canvas.save();
+//        canvas.rotate(rotateAngle, centerX, centerY);
+//        dstPath.reset();
+//        dstPath.lineTo(0, 0);
+//        pathMeasure.getSegment(0, pathLength * fraction, dstPath, true);
+//        cPaint.setStrokeWidth(partSize * 2);
+//        cPaint.setColor(getClickMenuColor());
+//        canvas.drawPath(dstPath, cPaint);
+//        canvas.restore();
     }
 
     /**
@@ -283,7 +283,7 @@ public class CircleMenu extends View {
         final float offsetRadius = 1.5f;
         RectF menuRectF;
         for (int i = 0; i < itemNum; i++) {
-            angle = i * (360 / itemNum);
+            angle = getAngle(i);
             if (status == STATUS_MENU_OPEN) {
                 itemX = (int) (centerX + Math.sin(Math.toRadians(angle)) * (circleMenuRadius - (1 - fraction) * partSize * offsetRadius));
                 itemY = (int) (centerY - Math.cos(Math.toRadians(angle)) * (circleMenuRadius - (1 - fraction) * partSize * offsetRadius));
@@ -312,6 +312,20 @@ public class CircleMenu extends View {
             }
             menuRectFList.add(i + 1, menuRectF);
         }
+    }
+
+    private int getAngle(int i) {
+        switch (i) {
+            case 0:
+                return -0;
+            case 1:
+                return -60;
+            case 2:
+                return -120;
+            case 3:
+                return -180;
+        }
+        return 0;
     }
 
     /**
